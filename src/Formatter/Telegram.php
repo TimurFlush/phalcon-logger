@@ -7,8 +7,6 @@ use Phalcon\Logger\Formatter;
 /**
  * Class Telegram
  * @package TimurFlush\PhalconLogger\Formatter
- * @author TimurFlush
- * @version 1.0.0
  */
 class Telegram extends Formatter
 {
