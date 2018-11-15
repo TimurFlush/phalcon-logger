@@ -18,23 +18,47 @@ class Telegram extends Formatter
     /**
      * @var string
      */
-    protected $_dateFormat = DATE_RFC1036;
+    protected $_dateFormat = \DATE_RFC1036;
 
     /**
      * Telegram constructor.
+     *
      * @param string|null $format
      * @param string|null $dateFormat
      */
-    public function __construct(string $format = null, string $dateFormat = null)
+    public function __construct(?string $format = null, ?string $dateFormat = null)
     {
-        if ($format !== null)
+        if ($format !== null) {
             $this->format = $format;
+        }
 
-        if ($dateFormat !== null)
+        if ($dateFormat !== null) {
             $this->_dateFormat = $dateFormat;
+        }
     }
 
     /**
+     * Sets the date format.
+     *
+     * @param string $format
+     */
+    public function setDateFormat(string $format): void
+    {
+        $this->_dateFormat = $format;
+    }
+
+    /**
+     * Returns the date format.
+     *
+     * @return string
+     */
+    public function getDateFormat(): string
+    {
+        return $this->_dateFormat;
+    }
+
+    /**
+     *
      * @param string $message
      * @param int $type
      * @param int $timestamp
@@ -44,12 +68,13 @@ class Telegram extends Formatter
     public function format($message, $type, $timestamp, $context = null)
     {
         $context = [
-            'date' => date($this->_dateFormat, $timestamp),
+            'date' => date($this->getDateFormat(), $timestamp),
             'type' => $this->getTypeString($type),
             'message' => $message
         ];
 
         $message = $this->interpolate($this->_format, $context);
+
         return $message;
     }
 }
