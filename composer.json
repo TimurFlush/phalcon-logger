@@ -2,7 +2,6 @@
   "name": "timur-flush/phalcon-logger",
   "description": "The logger extension of the Phalcon framework.",
   "license": "BSD-3-Clause",
-  "version": "1.0.0",
   "minimum-stability": "stable",
   "authors": [
     {
@@ -22,6 +21,11 @@
   "autoload": {
     "psr-4": {
       "TimurFlush\\PhalconLogger\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TimurFlush\\PhalconLogger\\": "tests/"
     }
   }
 }
