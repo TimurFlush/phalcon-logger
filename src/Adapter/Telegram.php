@@ -8,8 +8,6 @@ use TimurFlush\PhalconLogger\Formatter\Telegram as TelegramFormatter;
 /**
  * Class Telegram
  * @package TimurFlush\PhalconLogger\Adapter
- * @author TimurFlush
- * @version 1.0.0
  */
 class Telegram extends Adapter
 {
@@ -24,14 +22,16 @@ class Telegram extends Adapter
 
     /**
      * Telegram constructor.
+     *
      * @param array $options
      */
     public function __construct(array $options)
     {
-        if (!isset($options['chat_id'], $options['bot_token']))
+        if (!isset($options['chat_id'], $options['bot_token'])) {
             trigger_error("Parameters [chat_id] and [bot_token] are mandatory.");
+        }
 
-        $this->options = $options;
+        $this->options = array_merge($this->options, $options);
     }
 
     /**
@@ -43,12 +43,13 @@ class Telegram extends Adapter
     }
 
     /**
-     * @return object|\Phalcon\Logger\FormatterInterface|TelegramFormatter
+     * @return \Phalcon\Logger\FormatterInterface
      */
     public function getFormatter()
     {
-        if (!is_object($this->_formatter))
+        if ($this->_formatter === null) {
             $this->_formatter = new TelegramFormatter();
+        }
 
         return $this->_formatter;
     }
@@ -70,13 +71,14 @@ class Telegram extends Adapter
         }
 
         $ch = curl_init();
+
         curl_setopt_array($ch, [
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => true,
             CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 5,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_URL => 'https://api.telegram.org/bot' . $this->options['bot_token'] . '/sendMessage',
+            CURLOPT_URL => "https://api.telegram.org/bot${this->options['bot_token']}/sendMessage",
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => [
                 'chat_id' => $this->options['chat_id'],
@@ -84,9 +86,8 @@ class Telegram extends Adapter
                 'parse_mode' => 'Markdown'
             ]
         ]);
+
         curl_exec($ch);
         curl_close($ch);
     }
-
-
 }
