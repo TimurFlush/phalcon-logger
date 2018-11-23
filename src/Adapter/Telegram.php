@@ -17,7 +17,6 @@ class Telegram extends Adapter
     private $options = [
         'chat_id' => '',
         'bot_token' => '',
-        'allowed_types' => '*'
     ];
 
     /**
@@ -62,14 +61,6 @@ class Telegram extends Adapter
      */
     public function logInternal(string $message, int $type, int $time, array $context) : void
     {
-        if (isset($this->options['allowed_types'])){
-            if (is_string($this->options['allowed_types']) && $this->options['allowed_types'] !== '*') {
-                return;
-            } else if (is_array($this->options['allowed_types']) && !in_array($type, $this->options['allowed_types'])) {
-                return;
-            }
-        }
-
         $ch = curl_init();
 
         curl_setopt_array($ch, [
@@ -78,7 +69,7 @@ class Telegram extends Adapter
             CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 5,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_URL => "https://api.telegram.org/bot${this->options['bot_token']}/sendMessage",
+            CURLOPT_URL => "https://api.telegram.org/bot{$this->options['bot_token']}/sendMessage",
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => [
                 'chat_id' => $this->options['chat_id'],
