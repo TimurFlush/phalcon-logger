@@ -38,16 +38,6 @@ class Telegram extends Formatter
     }
 
     /**
-     * Returns the date format.
-     *
-     * @return string
-     */
-    public function getDateFormat(): string
-    {
-        return $this->_dateFormat;
-    }
-
-    /**
      *
      * @param string $message
      * @param int $type
@@ -58,7 +48,7 @@ class Telegram extends Formatter
     public function format($message, $type, $timestamp, $context = null)
     {
         $context = [
-            'date' => date($this->getDateFormat(), $timestamp),
+            'date' => date($this->_dateFormat, $timestamp),
             'type' => $this->getTypeString($type),
             'message' => $message
         ];
