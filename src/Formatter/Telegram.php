@@ -38,16 +38,6 @@ class Telegram extends Formatter
     }
 
     /**
-     * Sets the date format.
-     *
-     * @param string $format
-     */
-    public function setDateFormat(string $format): void
-    {
-        $this->_dateFormat = $format;
-    }
-
-    /**
      * Returns the date format.
      *
      * @return string
