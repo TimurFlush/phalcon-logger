@@ -29,7 +29,7 @@ class Telegram extends Formatter
     public function __construct(?string $format = null, ?string $dateFormat = null)
     {
         if ($format !== null) {
-            $this->format = $format;
+            $this->_format = $format;
         }
 
         if ($dateFormat !== null) {
