@@ -61,6 +61,7 @@ class Telegram extends Adapter
      */
     public function logInternal(string $message, int $type, int $time, array $context) : void
     {
+        //TODO: I don't know how to coverage this method, but you should believe me that it's works.
         $ch = curl_init();
 
         curl_setopt_array($ch, [
