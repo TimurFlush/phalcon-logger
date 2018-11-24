@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.org/TimurFlush/phalcon-logger.svg?branch=dev-2.x)](https://travis-ci.org/TimurFlush/phalcon-logger)
+[![Coverage Status](https://coveralls.io/repos/github/TimurFlush/phalcon-logger/badge.svg?branch=dev-2.x)](https://coveralls.io/github/TimurFlush/phalcon-logger?branch=dev-2.x)
