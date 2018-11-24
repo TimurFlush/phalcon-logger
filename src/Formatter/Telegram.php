@@ -47,11 +47,13 @@ class Telegram extends Formatter
      */
     public function format($message, $type, $timestamp, $context = null)
     {
-        $context = [
-            'date' => date($this->_dateFormat, $timestamp),
-            'type' => $this->getTypeString($type),
-            'message' => $message
-        ];
+        if (!is_array($context)) {
+            $context = [
+                'date' => date($this->_dateFormat, $timestamp),
+                'type' => $this->getTypeString($type),
+                'message' => $message
+            ];
+        }
 
         $message = $this->interpolate($this->_format, $context);
 
