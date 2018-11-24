@@ -2,3 +2,4 @@
 .note
 vendor/
 composer.lock
+build/
